@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="#000"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danya"
+            android:layout_alignParentStart="true"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_name"
+            android:layout_toLeftOf="@+id/tv_amount">
+            <TextView
+                android:id="@+id/tv_card_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4141414141414141"
+                android:layout_gravity="center"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:ellipsize="end"
+                android:maxLines="1"/>
+        </FrameLayout>
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+1000000000000 grn"
+            android:layout_alignParentRight="true"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+</FrameLayout>
