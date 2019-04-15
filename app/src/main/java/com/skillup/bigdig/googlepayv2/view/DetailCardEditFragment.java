@@ -7,9 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.skillup.bigdig.googlepayv2.R;
 import com.skillup.bigdig.googlepayv2.entity.BankCard;
@@ -21,10 +19,21 @@ import butterknife.OnClick;
 
 public class DetailCardEditFragment extends Fragment {
 
-  public static DetailCardEditFragment newInstance(int i) {
+  public interface ISaveListener{
+    void saveClicked();
+  }
+
+  private ISaveListener listener;
+
+  public void setListener(ISaveListener listener) {
+    this.listener = listener;
+  }
+
+  public static DetailCardEditFragment newInstance(int i, ISaveListener listener) {
     Bundle args = new Bundle();
     args.putInt(BankCardManager.ARG_CARD_ID, i);
     DetailCardEditFragment fragment = new DetailCardEditFragment();
+    fragment.setListener(listener);
     fragment.setArguments(args);
     return fragment;
   }
@@ -77,5 +86,6 @@ public class DetailCardEditFragment extends Fragment {
     bankCard.setOwnerName(etOwnerName.getText().toString());
     bankCard.setPin(Integer.valueOf(etPin.getText().toString()));
     BankCardManager.setChanged(true);
+    listener.saveClicked();
   }
 }

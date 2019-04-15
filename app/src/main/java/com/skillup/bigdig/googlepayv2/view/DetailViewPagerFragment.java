@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class DetailViewPagerFragment extends Fragment {
+public class DetailViewPagerFragment extends Fragment implements DetailCardEditFragment.ISaveListener {
 
   public static DetailViewPagerFragment newInstance(int position) {
 
@@ -48,31 +48,36 @@ public class DetailViewPagerFragment extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     int position = getArguments().getInt(BankCardManager.ARG_CARD_ID, 0);
-    vpDetailFragments.setAdapter(new DetailFragmentAdapter(getActivity().getSupportFragmentManager(), position));
+    vpDetailFragments.setAdapter(new DetailFragmentAdapter(getActivity().getSupportFragmentManager(), position, this));
     tlDetailFragments.setupWithViewPager(vpDetailFragments);
     vpDetailFragments.addOnPageChangeListener(pageChangeListener);
   }
 
   ViewPager.OnPageChangeListener pageChangeListener =
       new ViewPager.OnPageChangeListener() {
-    @Override
-    public void onPageScrolled(int i, float v, int i1) {
-      ((DetailFragmentAdapter)vpDetailFragments.getAdapter()).updateData();
-    }
+        @Override
+        public void onPageScrolled(int i, float v, int i1) {
+          ((DetailFragmentAdapter) vpDetailFragments.getAdapter()).updateData();
+        }
 
-    @Override
-    public void onPageSelected(int i) {
+        @Override
+        public void onPageSelected(int i) {
 
-    }
+        }
 
-    @Override
-    public void onPageScrollStateChanged(int i) {
-    }
-  };
+        @Override
+        public void onPageScrollStateChanged(int i) {
+        }
+      };
 
   @Override
   public void onDestroyView() {
     super.onDestroyView();
     unbinder.unbind();
+  }
+
+  @Override
+  public void saveClicked() {
+    vpDetailFragments.setCurrentItem(0);
   }
 }

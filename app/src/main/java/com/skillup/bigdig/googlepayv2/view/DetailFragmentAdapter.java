@@ -10,10 +10,11 @@ public class DetailFragmentAdapter extends FragmentStatePagerAdapter{
   DetailCardFragment fragmentOne;
   DetailCardEditFragment fragmentTwo;
 
-  public DetailFragmentAdapter(FragmentManager fm, int cardPosition) {
+  public DetailFragmentAdapter(FragmentManager fm, int cardPosition,
+         DetailCardEditFragment.ISaveListener listener) {
     super(fm);
     fragmentOne = DetailCardFragment.newInstance(cardPosition);
-    fragmentTwo = DetailCardEditFragment.newInstance(cardPosition);
+    fragmentTwo = DetailCardEditFragment.newInstance(cardPosition, listener);
   }
 
   @Override
