@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.skillup.bigdig.googlepayv2.R;
+import com.skillup.bigdig.googlepayv2.manager.BankCardManager;
 
 public class BankCardFragment extends Fragment {
 
@@ -51,8 +52,10 @@ public class BankCardFragment extends Fragment {
   public void onResume() {
     super.onResume();
     RecyclerView.Adapter currentAdapter = rvBankCards.getAdapter();
-    if(currentAdapter!=null)
+    if(currentAdapter!=null&&BankCardManager.wasChanged()) {
       currentAdapter.notifyDataSetChanged();
+      BankCardManager.setChanged(false);
+    }
   }
 
   public void setListener(BankCardAdapter.IDetailCardListener listener) {

@@ -76,5 +76,6 @@ public class DetailCardEditFragment extends Fragment {
     bankCard.setDate(etDate.getText().toString());
     bankCard.setOwnerName(etOwnerName.getText().toString());
     bankCard.setPin(Integer.valueOf(etPin.getText().toString()));
+    BankCardManager.setChanged(true);
   }
 }

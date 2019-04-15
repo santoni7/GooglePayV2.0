@@ -11,6 +11,8 @@ public class BankCardManager {
 
   private static List<BankCard> bankCardList = new ArrayList<>();
 
+  private static boolean wasChanged = false;
+
   public static List<BankCard> getBankCardList() {
     return bankCardList;
   }
@@ -25,5 +27,14 @@ public class BankCardManager {
     bankCardList.add(new BankCard("Anonym", "3451262147890177", "01.04.2021"));
     bankCardList.add(new BankCard("OlegButz", "2141256789017734", "01.04.2021"));
     bankCardList.add(new BankCard("Kostya", "9017126787214345", "01.04.2021"));
+    setChanged(true);
+  }
+
+  public static boolean wasChanged() {
+    return wasChanged;
+  }
+
+  public static void setChanged(boolean wasChanged) {
+    BankCardManager.wasChanged = wasChanged;
   }
 }

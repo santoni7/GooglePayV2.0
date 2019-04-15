@@ -43,7 +43,7 @@ public class DetailCardFragment extends Fragment {
     fillViews();
   }
 
-  private void initViews(View v){
+  private void initViews(View v) {
     tvOwnerName = v.findViewById(R.id.tv_owner_name);
     tvCardNum = v.findViewById(R.id.tv_card_num);
     tvAmount = v.findViewById(R.id.tv_amount);
@@ -51,9 +51,9 @@ public class DetailCardFragment extends Fragment {
     tvPin = v.findViewById(R.id.tv_pin);
   }
 
-  public void fillViews(){
+  private void fillViews() {
     int i = getArguments().getInt(BankCardManager.ARG_CARD_ID, -1);
-    if(i<0)
+    if (i < 0)
       throw new RuntimeException("wrong card id");
     BankCard bankCard = BankCardManager.getBankCardList().get(i);
     tvOwnerName.setText(bankCard.getOwnerName());
@@ -61,5 +61,11 @@ public class DetailCardFragment extends Fragment {
     tvAmount.setText(String.valueOf(bankCard.getAmount()));
     tvDate.setText(bankCard.getDate());
     tvPin.setText(String.valueOf(bankCard.getPin()));
+  }
+
+  public void update() {
+    if (BankCardManager.wasChanged()) {
+      fillViews();
+    }
   }
 }

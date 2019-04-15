@@ -44,6 +44,6 @@ public class DetailFragmentAdapter extends FragmentStatePagerAdapter{
   }
 
   public void updateData(){
-    fragmentOne.fillViews();
+    fragmentOne.update();
   }
 }
