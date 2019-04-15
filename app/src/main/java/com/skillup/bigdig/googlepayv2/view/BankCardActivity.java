@@ -27,7 +27,7 @@ public class BankCardActivity extends AppCompatActivity implements BankCardAdapt
   public void openDetailCardFragment(int i){
     getSupportFragmentManager()
         .beginTransaction()
-        .replace(R.id.holder_fragments, DetailCardFragment.newInstance(i))
+        .replace(R.id.holder_fragments, new DetailViewPagerFragment())
         .addToBackStack(null)
         .commit();
   }
