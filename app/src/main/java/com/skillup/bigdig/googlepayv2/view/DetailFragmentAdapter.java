@@ -6,12 +6,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class DetailFragmentAdapter extends FragmentStatePagerAdapter{
-  public DetailFragmentAdapter(FragmentManager fm) {
-    super(fm);
-  }
 
-  DetailCardFragment fragmentOne = DetailCardFragment.newInstance(0);
-  DetailCardEditFragment fragmentTwo = DetailCardEditFragment.newInstance(0);
+  DetailCardFragment fragmentOne;
+  DetailCardEditFragment fragmentTwo;
+
+  public DetailFragmentAdapter(FragmentManager fm, int cardPosition) {
+    super(fm);
+    fragmentOne = DetailCardFragment.newInstance(cardPosition);
+    fragmentTwo = DetailCardEditFragment.newInstance(cardPosition);
+  }
 
   @Override
   public Fragment getItem(int i) {

@@ -11,12 +11,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.skillup.bigdig.googlepayv2.R;
+import com.skillup.bigdig.googlepayv2.manager.BankCardManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class DetailViewPagerFragment extends Fragment {
+
+  public static DetailViewPagerFragment newInstance(int position) {
+
+    Bundle args = new Bundle();
+    args.putInt(BankCardManager.ARG_CARD_ID, position);
+    DetailViewPagerFragment fragment = new DetailViewPagerFragment();
+    fragment.setArguments(args);
+    return fragment;
+  }
 
   Unbinder unbinder;
 
@@ -37,7 +47,8 @@ public class DetailViewPagerFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    vpDetailFragments.setAdapter(new DetailFragmentAdapter(getActivity().getSupportFragmentManager()));
+    int position = getArguments().getInt(BankCardManager.ARG_CARD_ID, 0);
+    vpDetailFragments.setAdapter(new DetailFragmentAdapter(getActivity().getSupportFragmentManager(), position));
     tlDetailFragments.setupWithViewPager(vpDetailFragments);
     vpDetailFragments.addOnPageChangeListener(pageChangeListener);
   }
