@@ -39,7 +39,25 @@ public class DetailViewPagerFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     vpDetailFragments.setAdapter(new DetailFragmentAdapter(getActivity().getSupportFragmentManager()));
     tlDetailFragments.setupWithViewPager(vpDetailFragments);
+    vpDetailFragments.addOnPageChangeListener(pageChangeListener);
   }
+
+  ViewPager.OnPageChangeListener pageChangeListener =
+      new ViewPager.OnPageChangeListener() {
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+      ((DetailFragmentAdapter)vpDetailFragments.getAdapter()).updateData();
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+    }
+  };
 
   @Override
   public void onDestroyView() {

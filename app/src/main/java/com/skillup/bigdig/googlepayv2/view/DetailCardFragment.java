@@ -40,12 +40,7 @@ public class DetailCardFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-
-    int i = getArguments().getInt(BankCardManager.ARG_CARD_ID, -1);
-    if(i<0)
-      throw new RuntimeException("wrong card id");
-    BankCard bankCard = BankCardManager.getBankCardList().get(i);
-    fillViews(bankCard);
+    fillViews();
   }
 
   private void initViews(View v){
@@ -56,7 +51,11 @@ public class DetailCardFragment extends Fragment {
     tvPin = v.findViewById(R.id.tv_pin);
   }
 
-  private void fillViews(BankCard bankCard){
+  public void fillViews(){
+    int i = getArguments().getInt(BankCardManager.ARG_CARD_ID, -1);
+    if(i<0)
+      throw new RuntimeException("wrong card id");
+    BankCard bankCard = BankCardManager.getBankCardList().get(i);
     tvOwnerName.setText(bankCard.getOwnerName());
     tvCardNum.setText(bankCard.getCardNumber());
     tvAmount.setText(String.valueOf(bankCard.getAmount()));

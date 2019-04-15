@@ -10,13 +10,16 @@ public class DetailFragmentAdapter extends FragmentStatePagerAdapter{
     super(fm);
   }
 
+  DetailCardFragment fragmentOne = DetailCardFragment.newInstance(0);
+  DetailCardEditFragment fragmentTwo = DetailCardEditFragment.newInstance(0);
+
   @Override
   public Fragment getItem(int i) {
     switch (i){
         case 0:
-          return DetailCardFragment.newInstance(0);
+          return fragmentOne;
         case 1:
-          return DetailCardEditFragment.newInstance(0);
+          return fragmentTwo;
         default:
       throw new RuntimeException("wrong id");
     }
@@ -38,5 +41,9 @@ public class DetailFragmentAdapter extends FragmentStatePagerAdapter{
       default:
         throw new RuntimeException("wrong id");
     }
+  }
+
+  public void updateData(){
+    fragmentOne.fillViews();
   }
 }
