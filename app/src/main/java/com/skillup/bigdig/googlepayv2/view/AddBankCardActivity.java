@@ -34,7 +34,7 @@ public class AddBankCardActivity extends AppCompatActivity {
         String cardNum = etCardNum.getText().toString();
         String date = etDate.getText().toString();
         BankCard newBankCard = new BankCard(ownerName, cardNum, date);
-        BankCardManager.getBankCardList().add(newBankCard);
+        BankCardManager.addToList(newBankCard, AddBankCardActivity.this);
         BankCardManager.setChanged(true);
         finish();
       }

@@ -12,7 +12,7 @@ public class BankCardActivity extends AppCompatActivity implements BankCardAdapt
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_bank_card);
-    BankCardManager.initBankCardLis();
+    BankCardManager.initBankCardList(this);
     openBankCardFragment();
   }
 

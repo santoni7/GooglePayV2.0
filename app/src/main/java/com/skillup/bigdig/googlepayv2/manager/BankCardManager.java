@@ -1,6 +1,9 @@
 package com.skillup.bigdig.googlepayv2.manager;
 
+import android.content.Context;
+
 import com.skillup.bigdig.googlepayv2.entity.BankCard;
+import com.skillup.bigdig.googlepayv2.room.AppDatabaseProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +20,8 @@ public class BankCardManager {
     return bankCardList;
   }
 
-  public static void initBankCardLis(){
-    bankCardList.add(new BankCard("Danya", "1234567890121477", "01.04.2021"));
-    bankCardList.add(new BankCard("Sashsa", "1256789012341477", "01.04.2021"));
-    bankCardList.add(new BankCard("Lesha", "4561237821477901", "01.04.2021"));
-    bankCardList.add(new BankCard("Katya", "1221467890134577", "01.04.2021"));
-    bankCardList.add(new BankCard("Jenya", "0134567778921214", "01.04.2021"));
-    bankCardList.add(new BankCard("Kseniya", "9011456782123477", "01.04.2021"));
-    bankCardList.add(new BankCard("Anonym", "3451262147890177", "01.04.2021"));
-    bankCardList.add(new BankCard("OlegButz", "2141256789017734", "01.04.2021"));
-    bankCardList.add(new BankCard("Kostya", "9017126787214345", "01.04.2021"));
+  public static void initBankCardList(Context context){
+    bankCardList.addAll(AppDatabaseProvider.getInstance(context).getBankCardDao().getAll());
     setChanged(true);
   }
 
@@ -36,5 +31,16 @@ public class BankCardManager {
 
   public static void setChanged(boolean wasChanged) {
     BankCardManager.wasChanged = wasChanged;
+  }
+
+  public static void addToList(BankCard bankCard, Context context){
+    bankCardList.add(bankCard);
+    AppDatabaseProvider.getInstance(context)
+            .getBankCardDao().insert(bankCard);
+  }
+
+  public static void updateBankCard(int id, Context context){
+    AppDatabaseProvider.getInstance(context)
+            .getBankCardDao().update(bankCardList.get(id));
   }
 }

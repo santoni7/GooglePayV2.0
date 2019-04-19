@@ -1,6 +1,12 @@
 package com.skillup.bigdig.googlepayv2.entity;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class BankCard {
+  @PrimaryKey(autoGenerate = true)
+  private int id;
   private String ownerName;
   private String cardNumber;
   private float amount;
@@ -53,5 +59,13 @@ public class BankCard {
 
   public void setPin(int pin) {
     this.pin = pin;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 }
