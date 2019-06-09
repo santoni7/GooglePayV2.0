@@ -11,7 +11,6 @@ public class BankCardActivity extends AppCompatActivity implements BankCardAdapt
 
   private boolean isTwoPan = false;
   private BankCardFragment bankCardFragment;
-  private DetailCardFragment detailCardFragment;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,6 @@ public class BankCardActivity extends AppCompatActivity implements BankCardAdapt
     isTwoPan = detailLayout != null;
 
     bankCardFragment = BankCardFragment.newInstance(this);
-    detailCardFragment = DetailCardFragment.newInstance(0);
 
     BankCardManager.initBankCardLis();
 
@@ -34,7 +32,7 @@ public class BankCardActivity extends AppCompatActivity implements BankCardAdapt
       getSupportFragmentManager()
               .beginTransaction()
               .replace(R.id.holder_fragments, bankCardFragment)
-              .replace(R.id.holder_details, detailCardFragment)
+              .replace(R.id.holder_details, DetailCardFragment.newInstance(0))// переменная была не нужна для этого фрагмента
               .commit();
     } else {
       getSupportFragmentManager()
@@ -46,18 +44,12 @@ public class BankCardActivity extends AppCompatActivity implements BankCardAdapt
 
   @Override
   public void openDetailCardFragment(int i){
-    if(isTwoPan){
-      getSupportFragmentManager()
-              .beginTransaction()
-              .replace(R.id.holder_details, DetailCardFragment.newInstance(i))
-              .addToBackStack(null)
-              .commit();
-    } else {
-      getSupportFragmentManager()
-              .beginTransaction()
-              .replace(R.id.holder_fragments, DetailCardFragment.newInstance(i))
-              .addToBackStack(null)
-              .commit();
-    }
+    int containerId = R.id.holder_fragments;
+    if(isTwoPan) containerId = R.id.holder_details;
+    getSupportFragmentManager()
+            .beginTransaction()
+            .replace(containerId, DetailCardFragment.newInstance(i))
+            .addToBackStack(null)
+            .commit();
   }
 }
